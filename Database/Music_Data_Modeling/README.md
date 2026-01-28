@@ -8,7 +8,7 @@
 - 노래, 가수, 앨범, 소속사 등 음악 서비스의 핵심 엔티티 간의 유기적인 관계를 설계함.
 
 ### 2. 설계 구조 (ERD Architecture)
-![Music_ERD_Draft](./Song_ERD_1차.png)
+![Music_ERD_Draft]( ~/dobong_미니프로젝트/images/Song_ERD_1차.png)
 *(이미지 위치: /데이터베이스/Song_ERD_1차.png)*
 
 - **주요 엔티티(Entity)**:
