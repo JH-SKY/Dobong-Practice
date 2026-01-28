@@ -7,6 +7,7 @@ config.py
 __pycache__/
 *.py[cod]
 *$py.class
+.pyc
 
 # 3. 가상환경 (용량이 너무 커서 올리지 않음)
 venv/
