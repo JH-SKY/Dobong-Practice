@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>이종혁 | AI 서비스 개발자</title>
+  <meta name="description" content="비전공이었기에 구조적으로 배웠고, 영업/사업기획을 했기에 사용자를 먼저 생각하는 AI 서비스 개발자 이종혁 포트폴리오." />
+
+  <style>
+    :root{
+      /* Less-dark, premium navy */
+      --bg:#0f172a;
+      --bg2:#111b31;
+      --bg3:#0b1224;
+
+      /* Surfaces */
+      --panel: rgba(255,255,255,.035);
+      --panel2: rgba(255,255,255,.02);
+      --line: rgba(148,163,184,.16);
+
+      /* Text */
+      --text:#e4ecf8;
+      --title:#f3f6ff;
+      --title2:#dbe6ff;
+      --muted: rgba(231,238,252,.74);
+      --muted2: rgba(231,238,252,.56);
+
+      /* Accent (NO mint): soft blue only, used sparingly */
+      --accent:#7aa2ff;
+      --accent2: var(--accent);
+      --accentDim: rgba(122,162,255,.14);
+
+      --shadow: 0 18px 70px rgba(0,0,0,.45);
+      --shadow2: 0 10px 30px rgba(0,0,0,.28);
+      --radius: 18px;
+      --max: 1180px;
+
+      --sans: "Pretendard Variable","Pretendard","SUIT Variable","SUIT", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      font-weight: 450;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+
+      /* Premium background: soft light + subtle grid */
+      background:
+        radial-gradient(900px 520px at 14% 12%, rgba(122,162,255,.14), transparent 60%),
+        radial-gradient(900px 520px at 86% 28%, rgba(122,162,255,.10), transparent 60%),
+        radial-gradient(900px 520px at 50% 92%, rgba(148,163,184,.10), transparent 65%),
+        linear-gradient(180deg, var(--bg), var(--bg2) 55%, var(--bg3));
+      overflow-x:hidden;
+    }
+    /* subtle grid overlay */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 52px 52px;
+      opacity:.18;
+      mix-blend-mode: soft-light;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    b{font-weight:800}
+    .mono{font-family: var(--mono)}
+
+    /* cursor glow (subtle, premium) */
+    .cursorGlow{
+      position:fixed;
+      width:540px; height:540px;
+      border-radius:999px;
+      pointer-events:none;
+      transform: translate(-50%,-50%);
+      background:
+        radial-gradient(circle at 35% 35%, rgba(56, 28, 214, 0.14), transparent 62%),
+        radial-gradient(circle at 70% 55%, rgba(65, 29, 226, 0.1), transparent 62%);
+      filter: blur(26px);
+      opacity:.62;
+      z-index:1;
+      mix-blend-mode: screen;
+    }
+
+    .wrap{
+      max-width: var(--max);
+      margin:0 auto;
+      padding: 22px 10px 90px;
+      position:relative;
+      z-index:2;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 265px 1fr;
+      gap: 130px; /* more breathing room */
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr; gap: 30px}
+      .sidebar{position:relative; top:auto}
+    }
+
+    /* sidebar */
+    .sidebar{
+      position: sticky;
+      top: 62px;
+      padding: 6px 0;
+      margin-left: 0px;
+      transform: translateX(-50px);
+    }
+
+    .profile{
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+      padding: 12px 10px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .photoRow{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+    }
+    .photo{
+      width:52px; height:52px;
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      flex: 0 0 auto;
+    }
+    .photo img{width:100%; height:100%; object-fit:cover; display:block}
+
+    .who b{display:block; font-size:15px; letter-spacing:-.01em}
+    .who span{display:block; margin-top:5px; font-size:12.5px; color: var(--muted)}
+    .who .mail{margin-top:4px; color: var(--muted2); font-size:13px}
+
+    .tagline{
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.7;
+      padding-top: 12px;
+      border-top: 1px solid rgba(148,163,184,.14);
+    }
+
+    /* Left nav - clear scrollspy (no underline overlap) */
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .nav a{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 9px 10px 9px 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      transition: .18s ease;
+      background: transparent;
+      position:relative;
+    }
+    .nav a::before{
+      content:"";
+      position:absolute;
+      left:10px; top:50%;
+      width:6px; height:6px;
+      transform: translateY(-50%) scale(.6);
+      border-radius:999px;
+      background: var(--accent);
+      opacity:0;
+      transition: .18s ease;
+      box-shadow: 0 0 0 4px rgba(122,162,255,.10);
+    }
+    .nav a:hover{
+      border-color: rgba(122,162,255,.20);
+      background: rgba(122,162,255,.05);
+      color: var(--title);
+      transform: translateX(2px);
+    }
+    .nav a:hover::before{ opacity:1; transform: translateY(-50%) scale(1); }
+    .nav a.active{
+      border-color: rgba(122,162,255,.28);
+      background: rgba(122,162,255,.09);
+      color: var(--title);
+      font-weight: 750;
+    }
+    .nav a.active::before{ opacity:1; transform: translateY(-50%) scale(1); }
+
+    .nav a .idx{
+      color: var(--muted2);
+      font-family: var(--mono);
+      font-size: 11.5px;
+    }
+
+    .nav a .idx{
+      color: var(--muted2);
+      font-family: var(--mono);
+      font-size: 11.5px;
+    }
+
+    .social{
+      display:flex;
+      flex-wrap:nowrap;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(148,163,184,.14);
+    }
+    .pill{
+      padding: 7px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.16);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size: 11.5px;
+      transition: .18s ease;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .pill .ic{
+      width: 16px; height: 16px;
+      display:inline-grid;
+      place-items:center;
+      font-size: 13px;
+      opacity:.95;
+    }
+    .pill:hover{
+      border-color: rgba(122,162,255,.24);
+      background: rgba(122,162,255,.05);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .pill.primary{
+      border-color: rgba(122,162,255,.28);
+      background: rgba(122,162,255,.07);
+      color: var(--text);
+    }
+
+    /* main */
+    .main{padding-top: 10px; margin-left: 20px;}
+
+    .hero{
+      padding: 14px 0 36px;
+    }
+
+    /* Kicker: neutral, not minty */
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.18);
+      background: rgba(255,255,255,.02);
+      color: var(--muted2);
+      font-size: 11.5px;
+      letter-spacing:.02em;
+    }
+    .kicker .dot{
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(122,162,255,.10);
+    }
+
+    /* FIX: headline too big -> reduce */
+    
+h1{
+  margin: 16px 0 12px;
+  font-family: "Inter", var(--sans);
+  font-size: 33px;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #DDE6F2;
+  font-weight: 600;
+  max-width: 920px;
+}
+
+    @media (max-width: 520px){ h1{font-size: 30px} }
+
+    /* Accent only here, once */
+    .accent{
+      color: inherit;
+      font-weight: 800;
+    }
+
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 760px;
+    }
+
+    /* Buttons: add icons + better presence */
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,.18);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size: 13px;
+      transition: .18s ease;
+      user-select:none;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn .ic{
+      width: 18px; height: 18px;
+      display:inline-grid;
+      place-items:center;
+      font-size: 14px;
+      filter: saturate(1.05);
+    }
+    .btn::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: radial-gradient(circle at 20% 20%, rgba(122,162,255,.18), transparent 45%);
+      opacity:0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+    }
+    .btn:hover{
+      border-color: rgba(122,162,255,.26);
+      background: rgba(122,162,255,.06);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .btn:hover::after{opacity:.9;}
+    .btn.primary{
+      border-color: rgba(122,162,255,.32);
+      background: rgba(122,162,255,.10);
+      color: var(--text);
+    }
+    .btn.primary:hover{
+      background: rgba(122,162,255,.14);
+    }
+
+    /* sections: clean spacing, minimal boxes */
+    .section{
+      padding: 28px 0;
+      border-top: 1px solid rgba(148,163,184,.12);
+      scroll-margin-top: 110px;
+    }
+    .section h2{
+      margin:0;
+      font-size: 19px;
+      letter-spacing:-.01em;
+      color: var(--title2);
+      font-weight: 800;
+    }
+    .section .desc{
+      margin: 8px 0 0;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 820px;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 16px;
+    }
+    @media (max-width: 980px){ .twoCol{grid-template-columns:1fr} }
+
+    .block{
+      border: 1px solid rgba(148,163,184,.12);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .block::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(800px 240px at 15% 0%, rgba(122,162,255,.10), transparent 60%);
+      opacity:.18;
+      pointer-events:none;
+    }
+    .block:hover{
+      border-color: rgba(122,162,255,.20);
+      background: rgba(122,162,255,.03);
+      transform: translateY(-1px);
+    }
+    .block b{display:block; font-size: 13px; position:relative; z-index:1; color: var(--title2)}
+    .block p{margin:8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; position:relative; z-index:1}
+
+    /* Skills */
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .chip{
+      padding: 7px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.16);
+      background: rgba(255,255,255,.02);
+      color: var(--muted2);
+      font-size: 11.5px;
+      cursor:pointer;
+      user-select:none;
+      transition: .16s ease;
+    }
+    .chip:hover{
+      border-color: rgba(122,162,255,.22);
+      background: rgba(122,162,255,.05);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .chip.on{
+      border-color: rgba(122,162,255,.28);
+      background: rgba(122,162,255,.08);
+      color: var(--text);
+    }
+
+    .skillGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 760px){ .skillGrid{grid-template-columns:1fr} }
+
+    .skill{
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148,163,184,.12);
+      background: rgba(255,255,255,.02);
+      transition: .18s ease;
+    }
+    /* Skill state separation (A): card-level tone difference */
+.skill[data-tags*="now"]{
+  border-color: rgba(122,162,255,.28);
+  background: rgba(122,162,255,.05);
+}
+.skill[data-tags*="now"] .badge.live{
+  border-color: rgba(122,162,255,.34);
+  background: rgba(122,162,255,.12);
+  color: var(--text);
+  font-weight: 800;
+}
+.skill[data-tags*="plan"]{
+  border-color: rgba(148,163,184,.08);
+  background: rgba(0,0,0,.14); /* darker to separate from usable */
+  opacity: .78;
+}
+.skill[data-tags*="plan"] b{ color: rgba(219,230,255,.88); }
+.skill[data-tags*="plan"] .badge.plan{
+  border-color: rgba(148,163,184,.14);
+  background: rgba(255,255,255,.01);
+  color: var(--muted2);
+  font-weight: 750;
+}
+.skill:hover{
+      border-color: rgba(122,162,255,.20);
+      background: rgba(122,162,255,.03);
+      transform: translateY(-1px);
+    }
+    .skillTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    
+.badge{
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,.18);
+  color: var(--muted2);
+  background: rgba(255,255,255,.02);
+  white-space: nowrap;
+}
+
+    .badge.live{
+      border-color: rgba(122,162,255,.28);
+      background: rgba(122,162,255,.08);
+      color: var(--text);
+    }
+    .badge.plan{
+      border-color: rgba(148,163,184,.18);
+      color: var(--muted);
+    }
+    .skill small{
+      display:block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* projects list */
+    .stack{
+      margin-top: 16px;
+      display:grid;
+      gap: 12px;
+    }
+    .item{
+      border: 1px solid rgba(148,163,184,.12);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .item::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(900px 240px at 18% 0%, rgba(122,162,255,.11), transparent 62%);
+      opacity:.22;
+      pointer-events:none;
+    }
+    .item:hover{
+      border-color: rgba(122,162,255,.20);
+      background: rgba(122,162,255,.03);
+      transform: translateY(-1px);
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      position:relative;
+      z-index:1;
+    }
+    .tag{
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.16);
+      background: rgba(255,255,255,.02);
+      color: var(--muted2);
+    }
+    .tag.accent{
+      border-color: rgba(122,162,255,.28);
+      background: rgba(122,162,255,.08);
+      color: var(--text);
+    }
+    .item h3{
+      margin:0 0 6px;
+      font-size: 16px;
+      letter-spacing:-.01em;
+      position:relative;
+      z-index:1;
+      color: var(--title2);
+    }
+    .item p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      position:relative;
+      z-index:1;
+      max-width: 900px;
+    }
+    .links{
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      position:relative;
+      z-index:1;
+    }
+    .miniLink{
+      font-size: 11.5px;
+      padding: 7px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,.16);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      transition: .18s ease;
+      user-select:none;
+    }
+    .miniLink:hover{
+      border-color: rgba(122,162,255,.22);
+      background: rgba(122,162,255,.05);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    /* FAQ */
+    details{
+      border: 1px solid rgba(148,163,184,.12);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+    details + details{margin-top: 10px}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      user-select:none;
+      font-weight: 800;
+      letter-spacing:-.01em;
+      color: var(--text);
+    }
+    summary::-webkit-details-marker{display:none}
+    .answer{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .caret{
+      color: var(--muted2);
+      font-family: var(--mono);
+    }
+    details[open] .caret{transform: rotate(90deg); display:inline-block}
+
+    /* FAQ interaction polish */
+    details{
+      transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    details:hover{
+      border-color: rgba(122,162,255,.20);
+      background: rgba(122,162,255,.03);
+    }
+    details[open]{
+      border-color: rgba(122,162,255,.28);
+      background: rgba(122,162,255,.06);
+      box-shadow: 0 12px 38px rgba(0,0,0,.22);
+    }
+    summary{ padding: 2px 0; }
+    summary:focus-visible{
+      outline: 2px solid rgba(122,162,255,.35);
+      outline-offset: 6px;
+      border-radius: 12px;
+    }
+    .caret{
+      transition: transform .22s ease;
+      transform-origin: center;
+    }
+
+    /* Smooth answer panel */
+    .answer{
+      overflow:hidden;
+      will-change: height, opacity, margin-top;
+    }
+    .answer.collapsed{
+      height: 0px;
+      opacity: 0;
+      margin-top: 0;
+    }
+    .email{
+      font-family: var(--sans);
+      font-size: 14.5px;
+      letter-spacing: 0.02em;
+    }
+    footer{
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148,163,184,.12);
+      color: var(--muted2);
+      font-size: 11.5px;
+    }
+
+    /* reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: 700ms ease}
+    .reveal.on{opacity:1; transform: translateY(0)}
+  </style>
+</head>
+
+<body>
+  <div class="cursorGlow" id="glow" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar reveal" id="sidebar">
+        <div class="profile">
+          <div class="photoRow">
+            <div class="photo">
+              <img src="profile.png" alt="이종혁 프로필" onerror="this.style.display='none'">
+            </div>
+            <div class="who">
+              <b>이종혁</b>
+              <span>AI 서비스 개발자</span>
+              <div class="mail mono">whdgur2034@naver.com</div>
+            </div>
+          </div>
+
+            <div class="tagline">
+              <span class="mono">01.</span> 구현 전에 정리합니다<br/>
+              <span class="mono">02.</span> 기능보다 행동을 봅니다<br/>
+              <span class="mono">03.</span> AI를 실제로 쓰이는 형태로 만듭니다
+            </div>
+
+          <nav class="nav" id="nav">
+            <a href="#hero"><span>Intro</span><span class="idx">01</span></a>
+            <a href="#about"><span>About</span><span class="idx">02</span></a>
+            <a href="#skills"><span>Skills</span><span class="idx">03</span></a>
+            <a href="#projects"><span>Projects</span><span class="idx">04</span></a>
+            <a href="#roadmap"><span>Roadmap</span><span class="idx">05</span></a>
+            <a href="#faq"><span>FAQ</span><span class="idx">06</span></a>
+            <a href="#contact"><span>Contact</span><span class="idx">07</span></a>
+          </nav>
+
+          <div class="social">
+            <a class="pill primary" href="https://github.com/JH-SKY" target="_blank" rel="noreferrer"><span class="ic">🐙</span> GitHub</a>
+            <a class="pill" href="#" onclick="alert('Blog는 첫 배포 후 연결합니다.'); return false;"><span class="ic">📝</span> Blog</a>
+            <a class="pill" href="resume.pdf" download><span class="ic">📄</span> Resume</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <!-- HERO -->
+        <section id="hero" class="hero reveal">
+          <span class="kicker"><span class="dot"></span> Always learning · Always building
+</span>
+          <h1>
+           기능보다<br/>
+            <span class="accent">흐름을 먼저 생각하겠습니다.</span>
+          </h1>
+            <p class="lead">
+              AI를 “만드는 기술”에서 멈추지 않고, <b>실제로 쓰이고·운영되는 서비스</b>로 만들겠습니다.
+              <br/>기준은 항상 “동작”이 아니라 “사용”입니다.
+            </p>
+
+</section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section reveal">
+        <h2>About</h2>
+        <p class="desc">
+          저는 개발을 기술 습득이 아니라, 문제를 구조화하는 일로 배웠습니다.
+        </p>
+
+        <div class="twoCol">
+          <div class="block">
+            <b><span class="mono">01.</span> 구조적 학습</b>
+            <p>
+              바로 구현하지 않고,<br/>
+              문제와 조건을 먼저 정리합니다.<br/>
+              그래서 만든 이유를 설명할 수 있는 구조로 개발합니다.
+            </p>
+          </div>
+
+          <div class="block">
+            <b><span class="mono">02.</span> 사용자 관점</b>
+            <p>
+              기능보다,<br/>
+              사용자가 실제로 무엇을 하게 될지를 먼저 봅니다.<br/>
+              설명이 아니라,<br/>
+              바로 선택하고 실행할 수 있게 만듭니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="section reveal">
+          <h2>Skills</h2>
+          <p class="desc">도봉캠퍼스 커리큘럼 기준으로, “활용 가능”과 “학습 예정”으로 구분했습니다.</p>
+
+          <div class="chips" id="chipRow">
+            <div class="chip on" data-filter="all">전체</div>
+            <div class="chip" data-filter="now">활용 가능</div>
+            <div class="chip" data-filter="plan">학습 예정</div>
+            <div class="chip" data-filter="ai">AI/LLM</div>
+            <div class="chip" data-filter="backend">Backend</div>
+            <div class="chip" data-filter="db">DB</div>
+            <div class="chip" data-filter="collab">협업</div>
+            <div class="chip" data-filter="fe">Frontend</div>
+          </div>
+
+          <div class="skillGrid" id="skillGrid">
+            <!-- 현재 가능 -->
+            <div class="skill" data-tags="now ai">
+              <div class="skillTop"><b>프롬프트 엔지니어링 · LLM API 활용</b><span class="badge live">활용 가능</span></div>
+              <small>요구사항을 질문으로 쪼개기 · 답변 포맷 고정(JSON) · 실패 케이스 대비(재질문/가드레일)</small>
+            </div>
+
+            <div class="skill" data-tags="now backend">
+              <div class="skillTop"><b>Python 기초/문법 · OOP</b><span class="badge live">활용 가능</span></div>
+              <small>로직 구현 · 모듈화 · 클래스 설계(상태/역할 분리) · 간단한 자동화 스크립트</small>
+            </div>
+
+            <div class="skill" data-tags="now backend">
+              <div class="skillTop"><b>알고리즘 기초(정렬·탐색·DP) · 문제 풀이 루틴</b><span class="badge live">활용 가능</span></div>
+              <small>입력/출력 정리 → 핵심 조건 도출 → 시간복잡도 고려 → 테스트 케이스로 검증</small>
+            </div>
+
+            <div class="skill" data-tags="now collab">
+              <div class="skillTop"><b>Git · GitHub 협업</b><span class="badge live">활용 가능</span></div>
+              <small>브랜치 전략 기초 · PR 단위 작업 · 이슈로 작업 쪼개기 · README/문서화</small>
+            </div>
+
+            <div class="skill" data-tags="now db backend">
+              <div class="skillTop"><b>관계형 DB 기초 · SQL</b><span class="badge live">활용 가능</span></div>
+              <small>테이블/관계 설계 · CRUD · 인덱스/정규화 기본 · 서비스 데이터 저장/조회</small>
+            </div>
+
+            <div class="skill" data-tags="now ai">
+              <div class="skillTop"><b>개발 환경 구축 · AI 코딩 보조</b><span class="badge live">활용 가능</span></div>
+              <small>프로젝트 구조 잡기 · Cursor 활용(리팩토링/테스트 케이스/설명 가능한 코드)</small>
+            </div>
+
+            <div class="skill" data-tags="now ai">
+              <div class="skillTop"><b>ERD 작성 · 스키마 고도화</b><span class="badge plan">학습 예정</span></div>
+              <small>업무 도메인 기준 모델링 · 로그/히스토리 · 운영 관점 데이터 설계</small>
+            </div>
+            <!-- 학습/구현 중 -->
+            <div class="skill" data-tags="plan backend">
+              <div class="skillTop"><b>FastAPI · REST API</b><span class="badge plan">학습 예정</span></div>
+              <small>CRUD API · 요청/응답 스키마 · 에러 처리 · 인증(JWT) · 배포 가능한 형태로 정리</small>
+            </div>
+
+            <div class="skill" data-tags="plan ai backend">
+              <div class="skillTop"><b>RAG(문서 기반 Q&A)</b><span class="badge plan">학습 예정</span></div>
+              <small>문서 파싱/청킹 · 임베딩/검색 · 근거 문장 표시 · “모르겠습니다” 처리</small>
+            </div>
+
+            <div class="skill" data-tags="plan fe">
+              <div class="skillTop"><b>Frontend 기초(HTML/CSS/JS · DOM)</b><span class="badge plan">학습 예정</span></div>
+              <small>사용자 입력 UX · 상태 표시(로딩/에러) · 결과를 “다음 행동”으로 보여주는 UI</small>
+            </div>
+
+            <div class="skill" data-tags="plan fe">
+              <div class="skillTop"><b>React 기초(SPA · Props/State · Hooks)</b><span class="badge plan">학습 예정</span></div>
+              <small>컴포넌트 분리 · 폼/리스트 · 간단한 대시보드 UI</small>
+            </div>
+
+            <div class="skill" data-tags="plan ai">
+              <div class="skillTop"><b>AI Agent · 워크플로우(툴 호출)</b><span class="badge plan">학습 예정</span></div>
+              <small>툴/함수 호출 · 멀티스텝 작업 · 안전장치 · (추가) MCP/A2A 개념 학습</small>
+            </div>
+
+
+          </div>
+        </section>
+
+
+        <!-- PROJECTS -->
+        <section id="projects" class="section reveal">
+          <h2>Projects</h2>
+          <p class="desc">현재 프로젝트는 정리 중이며, <b>5월 공개</b>를 목표로 준비하고 있습니다.</p>
+
+          <div class="stack">
+            <div class="item">
+              <div class="meta">
+                <span class="tag accent">Coming Soon</span>
+                <span class="tag">May</span>
+                <span class="tag">Build in Public</span>
+              </div>
+              <h3>프로젝트 페이지 오픈 준비중</h3>
+              <p>
+               완성된 뒤에,<br/>
+                  코드와 데모를 한 번에 볼 수 있게 공개할 예정입니다.
+
+              </p>
+              <div class="links">
+                <a class="miniLink" href="https://github.com/JH-SKY" target="_blank" rel="noreferrer">🐙 GitHub에서 진행상황 보기</a>
+                <a class="miniLink" href="#" onclick="alert('프로젝트는 5월 공개 예정입니다.'); return false;">🔒 Demo(오픈 전)</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ROADMAP -->
+<section id="roadmap" class="section reveal">
+  <h2>Roadmap</h2>
+  <p class="desc">
+    현재는 교육과정에 집중하고 있으며, 서비스 로드맵은 <b>교육 종료 후 구체화 예정</b>입니다.
+  </p>
+
+  <div class="stack">
+    <div class="item">
+      <div class="meta">
+        <span class="tag accent">Coming Soon</span>
+        <span class="tag">Post-bootcamp</span>
+      </div>
+      <h3>로드맵 준비중</h3>
+      <p>
+        교육 종료 후, 실제로 만들 서비스의 <b>요구사항</b>과 <b>MVP 범위</b>를 확정해
+        로드맵을 공개하겠습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+        <!-- FAQ -->
+        <section id="faq" class="section reveal">
+          <h2>FAQ</h2>
+          <p class="desc">면접에서 자주 나오는 질문을 먼저 정리했습니다.</p>
+
+          <!-- 면접관이 자주 묻는 질문 -->
+          <details>
+            <summary>AI 서비스 개발을 선택한 이유가 있나요 ? <span class="caret">›</span></summary>
+            <div class="answer">
+              AI는 앞으로 사람들의 생활 방식을 크게 바꿀 거라고 생각합니다. <br/><b>변화의 흐름을 지켜보다 보니</b> AI에 관심이 생기게 되었고
+              개발을 접해보니,<br/> 문제를 해결하고 만든 기능이 실제로 동작하고 서비스로 배포되는 과정에 흥미를 느꼈습니다. <br/>
+              그래서 AI 서비스 개발을 선택했습니다.
+            </div>
+          </details>
+
+          <details>
+            <summary>비즈니스/영업 경험이 개발에 어떤 장점이 되나요? <span class="caret">›</span></summary>
+            <div class="answer">
+              영업은 상대가 이해하는 것으로 끝나지 않고, <b>행동</b>까지 이어져야 성과가 납니다.<br/>
+              그래서 개발할 때도,이 기능을 보고 사용자가 어떤 <b>행동</b>을 하게 될지를 먼저 생각합니다. <br/>
+              개발 결과물 역시 기능 설명이 아니라, 사용자 관점에서 설명하는 데 익숙합니다.
+            </div>
+          </details>
+
+          <details>
+            <summary>가장 자신 있는 강점 은 무엇인가요? <span class="caret">›</span></summary>
+            <div class="answer">
+                새로운 개념을 빠르게 이해하고,<br/>
+                실제 작업에 어떻게 쓰일지까지 같이 생각합니다.<br/>
+                그래서 질문도 기능보다는<br/>
+                동작 방식이나 구조 쪽으로 하게 됩니다.<br/>
+                이런 점에서 이해가 빠르다는 평가를 자주 받습니다.
+
+            </div>
+          </details>
+
+          <!-- 비전공/고졸/부트캠프 출신에게 자주 받는 질문 -->
+          <details>
+            <summary>전공자가 아닌데, 개발을 제대로 따라갈 수 있나요? <span class="caret">›</span></summary>
+            <div class="answer">
+                지난 학습과정과 원하는 프로젝트를 시행하는데 큰 어려움은 없었습니다. <br/>
+                비전공자인 만큼, 결과로 보여드리기 위해 더 신경 써서 준비해왔습니다.
+
+
+            </div>
+          </details>
+
+          <details>
+            <summary>실무 경험이 없는 상태에서, 어떤 부분을 맡길 수 있을까요? <span class="caret">›</span></summary>
+            <div class="answer">
+                      기존 코드 흐름을 이해하고,<br/>작은 기능 단위 작업부터 바로 맡을 수 있습니다.<br/><br/>
+                      FastAPI 기반으로 간단한 API를 설계·구현하고,<br/>
+                      외부 API나 AI 모델을 연동하는 작업을<br/>
+                      직접 진행해본 경험이 있습니다.<br/><br/>
+
+                      또한 GitHub를 활용한 팀 프로젝트를 진행해,<br/>
+                      협업을 위한 기본적인 GitHub 사용에도<br/>
+                      큰 어려움은 없습니다.
+
+            </div>
+          </details>
+
+          <details>
+            <summary>막혔던 문제를 어떻게 해결했는지 사례로 말해줄 수 있나요? <span class="caret">›</span></summary>
+            <div class="answer">
+                5월 중 프로젝트 완료 후,<br/>
+                실제 경험을 기반으로 답변을 정리할 예정입니다.
+
+            </div>
+          </details>
+        </section>
+
+
+        <!-- CONTACT -->
+<section id="contact" class="section reveal">
+  <h2>Contact</h2>
+  <p class="desc">이메일로 연락 주시면 가장 빠르게 확인할 수 있습니다.
+</p>
+
+  <div class="twoCol">
+    <div class="block">
+      <b>Email</b>
+      <p class="email">whdgur2034@naver.com</p>
+      <p>부족한 부분은 계속 보완하며, 더 나은 결과를 만들어가겠습니다.</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+        <footer>
+          © <span id="y"></span> Jonghyuk Lee · About
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // cursor glow follow
+    const glow = document.getElementById("glow");
+    let gx = innerWidth * 0.3, gy = innerHeight * 0.2;
+    let tx = gx, ty = gy;
+    window.addEventListener("mousemove", (e) => { tx = e.clientX; ty = e.clientY; }, {passive:true});
+    function loop(){
+      gx += (tx - gx) * 0.07;
+      gy += (ty - gy) * 0.07;
+      glow.style.left = gx + "px";
+      glow.style.top  = gy + "px";
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    // reveal on scroll
+    const reveals = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.classList.add("on");
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.12});
+    reveals.forEach(el=>io.observe(el));
+
+    // nav active (stable scrollspy)
+// 기준선(뷰포트 상단 1/3)에 가장 가까운 섹션을 활성화해서 "튀는" 현상 방지
+const nav = document.getElementById("nav");
+const navLinks = Array.from(nav.querySelectorAll("a"));
+const sections = navLinks
+  .map(a => document.querySelector(a.getAttribute("href")))
+  .filter(Boolean);
+
+let currentId = null;
+let ticking = false;
+
+function setActive(id){
+  if(!id || id === currentId) return;
+  currentId = id;
+  navLinks.forEach(a=>{
+    const on = a.getAttribute("href") === ("#" + id);
+    a.classList.toggle("active", on);
+    if(on) a.setAttribute("aria-current","true");
+    else a.removeAttribute("aria-current");
+  });
+}
+
+function updateScrollSpy(){
+  ticking = false;
+
+  // 문서 맨 아래쪽에서는 기준선이 마지막 섹션까지 닿지 않는 문제가 있어 보정
+  const bottomY = window.scrollY + window.innerHeight;
+  const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+  if(bottomY >= docH - 2){
+    const last = sections[sections.length - 1];
+    if(last) setActive(last.id);
+    return;
+  }
+
+  const refY = window.scrollY + window.innerHeight * 0.35; // 상단 1/3 근처
+  let best = null;
+  let bestDist = Infinity;
+
+  for(const s of sections){
+    const top = s.offsetTop;
+    const bottom = top + s.offsetHeight;
+
+    // refY가 섹션 내부면 최우선
+    if(refY >= top && refY < bottom){
+      best = s;
+      break;
+    }
+
+    // 아니면 refY와 섹션 top의 거리로 가장 가까운 후보 선택
+    const dist = Math.abs(refY - top);
+    if(dist < bestDist){
+      bestDist = dist;
+      best = s;
+    }
+  }
+
+  if(best) setActive(best.id);
+}
+
+window.addEventListener("scroll", ()=>{
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(updateScrollSpy);
+}, {passive:true});
+
+window.addEventListener("resize", ()=>{
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(updateScrollSpy);
+});
+
+// nav click: '스르륵' 넘어가는 느낌을 위해 커스텀 이징 스크롤 사용 (Intro는 예외)
+function smoothScrollTo(to, duration=700){
+  const start = window.scrollY;
+  const change = to - start;
+  const startTime = performance.now();
+  const easeInOutCubic = (t) => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2;
+
+  function step(now){
+    const elapsed = now - startTime;
+    const t = Math.min(1, elapsed / duration);
+    const eased = easeInOutCubic(t);
+    window.scrollTo(0, start + change * eased);
+    if(t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+navLinks.forEach(a=>{
+  a.addEventListener("click", (e)=>{
+    const href = a.getAttribute("href");
+    if(!href || !href.startsWith("#")) return;
+    const target = document.querySelector(href);
+    if(!target) return;
+
+    e.preventDefault();
+    const isHero = target.id === "hero";
+    const offset = isHero ? 0 : Math.round(window.innerHeight * 0.15) + 22; // 중앙 상단 느낌
+    const top = Math.max(0, target.offsetTop - offset);
+
+    // 클릭 직후 active도 즉시 반영(체감 개선)
+    setActive(target.id);
+
+    smoothScrollTo(top, 720);
+    history.replaceState(null, "", href);
+  });
+});
+// 초기 1회 세팅
+updateScrollSpy();
+// skill filter
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const skills = Array.from(document.querySelectorAll("#skillGrid .skill"));
+    function setFilter(filter){
+      chips.forEach(c => c.classList.toggle("on", c.dataset.filter === filter));
+      skills.forEach(s => {
+        const tags = (s.dataset.tags || "").split(" ").filter(Boolean);
+        const show =
+          filter === "all" ||
+          (filter === "now" && tags.includes("now")) ||
+          (filter === "plan" && tags.includes("plan")) ||
+          (filter === "ai" && tags.includes("ai")) ||
+          (filter === "backend" && tags.includes("backend")) ||
+          (filter === "db" && tags.includes("db")) ||
+          (filter === "collab" && tags.includes("collab")) ||
+          (filter === "fe" && tags.includes("fe"));
+        s.style.display = show ? "" : "none";
+      });
+    }
+    chips.forEach(c => c.addEventListener("click", () => setFilter(c.dataset.filter)));
+    // FAQ smooth accordion + open-state highlight
+    const faqDetails = Array.from(document.querySelectorAll("#faq details"));
+    const ONE_OPEN = true; // 한 번에 하나만 열기 (원치 않으면 false)
+
+    function animateFAQ(details, open){
+      const answer = details.querySelector(".answer");
+      if(!answer) return;
+
+      // ensure collapsed state class exists for measurement
+      if(open){
+        answer.classList.remove("collapsed");
+        details.open = true;
+      }
+
+      const startHeight = answer.getBoundingClientRect().height;
+      const startMargin = parseFloat(getComputedStyle(answer).marginTop) || 0;
+
+      // measure target height
+      answer.style.height = "auto";
+      answer.style.opacity = "1";
+      answer.style.marginTop = open ? "10px" : "0px";
+      const targetHeight = answer.getBoundingClientRect().height;
+
+      // reset to start
+      answer.style.height = startHeight + "px";
+      answer.style.marginTop = startMargin + "px";
+      answer.offsetHeight; // reflow
+
+      const endHeight = open ? targetHeight : 0;
+      const endOpacity = open ? 1 : 0;
+      const endMargin = open ? 10 : 0;
+
+      const anim = answer.animate(
+        [
+          { height: startHeight + "px", opacity: open ? 0.6 : 1, marginTop: startMargin + "px" },
+          { height: endHeight + "px", opacity: endOpacity, marginTop: endMargin + "px" }
+        ],
+        { duration: 240, easing: "cubic-bezier(.2,.8,.2,1)" }
+      );
+
+      anim.onfinish = () => {
+        if(!open){
+          details.open = false;
+          answer.classList.add("collapsed");
+        }else{
+          answer.classList.remove("collapsed");
+        }
+        answer.style.height = open ? "auto" : "0px";
+        answer.style.opacity = "";
+        answer.style.marginTop = open ? "10px" : "0px";
+      };
+    }
+
+    // init collapsed state for closed items
+    faqDetails.forEach(d => {
+      const ans = d.querySelector(".answer");
+      if(!ans) return;
+      if(!d.open) ans.classList.add("collapsed");
+    });
+
+    faqDetails.forEach((d) => {
+      const summary = d.querySelector("summary");
+      if(!summary) return;
+
+      summary.addEventListener("click", (e) => {
+        e.preventDefault();
+        const isOpening = !d.open;
+
+        if(ONE_OPEN && isOpening){
+          faqDetails.forEach(other => {
+            if(other !== d && other.open){
+              animateFAQ(other, false);
+            }
+          });
+        }
+
+        animateFAQ(d, isOpening);
+      });
+    });
+
+  </script>
+</body>
+</html>
