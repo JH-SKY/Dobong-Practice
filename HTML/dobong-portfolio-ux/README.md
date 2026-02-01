@@ -1,5 +1,3 @@
-본 내용은 README.md 파일에 그대로 작성하시면 됩니다.
-
 # 포트폴리오 사이트 기능/UX 개선 기록 (Dobong-Practice)
 
 ## 1. 프로젝트 구조 (Repository Structure)
